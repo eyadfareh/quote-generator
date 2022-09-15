@@ -3,6 +3,14 @@ $ng: hsl(150, 100%, 66%); // Neon green
 $gb: hsl(217, 19%, 38%); // Grayish blue
 $dgb:hsl(217, 19%, 24%); // Dark grayish blue
 $db: hsl(218, 23%, 16%); // Dark blue
+$desktop-size: 570px;
+@mixin mobile{
+  @media screen and (max-width: ($desktop-size - 1px)) { @content; }
+}
+@mixin desktop{
+  @media screen and (min-width: $desktop-size) { @content; }
+}
+
 *{
   box-sizing:border-box;
   font-family: 'Manrope', sans-serif;
@@ -13,10 +21,13 @@ $db: hsl(218, 23%, 16%); // Dark blue
   align-items:center;
   height:100vh;
   background-color:$db;
+  @include mobile{
+    padding:15px;
+  }
   .card{
     background-color:$dgb;
     text-align:center;
-    max-width:540px;
+    max-width:($desktop-size - 30px);
     border-radius:10px;
     padding:30px;
     padding-bottom:60px;
@@ -59,4 +70,13 @@ $db: hsl(218, 23%, 16%); // Dark blue
     }
   }
 }
-
+.desktop-only{
+  @include mobile{
+    display:none;
+  }
+}
+.mobile-only{
+  @include desktop{
+    display:none;
+  }
+}
